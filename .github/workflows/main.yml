@@ -1,4 +1,4 @@
-name: GeoIp Update
+name: Main
 
 on: push
 
@@ -12,5 +12,7 @@ jobs:
           fetch-depth: 1
       - name: Release
         uses: docker://softprops/action-gh-release:a178add808ad86f0833c5833a8328524184d73f8
+        with:
+          files: "*.md"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
