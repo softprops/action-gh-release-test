@@ -12,10 +12,13 @@ jobs:
         run: echo ${{ github.sha }} > Release.txt
       - name: Test
         run: cat Release.txt
+      - name: Generate Changelog
+        run:  echo "# Good things have arrived" > ${{ github.workflow }}-Notes.txt
       - name: Release
         uses: docker://softprops/action-gh-release:latest
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: Release.txt
+          body_path: ${{ github.workflow }}-Notes.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
